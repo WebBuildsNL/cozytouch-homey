@@ -381,13 +381,13 @@
       },
       "class": "heater",
       "capabilities": [
-        "onoff",
         "target_temperature",
         "measure_temperature",
-        "measure_power",
+        "water_temperature",
+        "heating_schedule",
         "inlet_temperature",
         "outlet_temperature",
-        "hot_water_available",
+        "measure_water",
         "heating_mode",
         "boost_mode",
         "meter_power"
@@ -397,6 +397,13 @@
           "min": 30,
           "max": 65,
           "step": 1
+        },
+        "measure_temperature": {
+          "title": {
+            "en": "Water Temperature",
+            "nl": "Watertemperatuur"
+          },
+          "insights": true
         }
       },
       "pair": [
@@ -581,24 +588,16 @@
         }
       ]
     },
-    "hot_water_available": {
-      "type": "number",
+    "heating_schedule": {
+      "type": "string",
       "title": {
-        "en": "Hot Water Available",
-        "nl": "Warm water beschikbaar"
-      },
-      "units": {
-        "en": "%",
-        "nl": "%"
+        "en": "Heating Schedule (Today)",
+        "nl": "Verwarmingsschema (vandaag)"
       },
       "getable": true,
       "setable": false,
-      "insights": true,
       "uiComponent": "sensor",
-      "icon": "/assets/hot-water.svg",
-      "min": 0,
-      "max": 100,
-      "decimals": 0
+      "icon": "/assets/boost.svg"
     },
     "inlet_temperature": {
       "type": "number",
@@ -617,6 +616,25 @@
       "icon": "/assets/temperature.svg",
       "decimals": 1
     },
+    "measure_water": {
+      "type": "number",
+      "title": {
+        "en": "Hot Water Available",
+        "nl": "Warm water beschikbaar"
+      },
+      "units": {
+        "en": "%",
+        "nl": "%"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "uiComponent": "sensor",
+      "icon": "/assets/hot-water.svg",
+      "min": 0,
+      "max": 100,
+      "decimals": 0
+    },
     "outlet_temperature": {
       "type": "number",
       "title": {
@@ -630,6 +648,23 @@
       "getable": true,
       "setable": false,
       "insights": true,
+      "uiComponent": "sensor",
+      "icon": "/assets/temperature.svg",
+      "decimals": 1
+    },
+    "water_temperature": {
+      "type": "number",
+      "title": {
+        "en": "Water Temperature",
+        "nl": "Watertemperatuur"
+      },
+      "units": {
+        "en": "°C",
+        "nl": "°C"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": false,
       "uiComponent": "sensor",
       "icon": "/assets/temperature.svg",
       "decimals": 1

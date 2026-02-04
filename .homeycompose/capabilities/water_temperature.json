@@ -1,0 +1,17 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Water Temperature",
+    "nl": "Watertemperatuur"
+  },
+  "units": {
+    "en": "\u00b0C",
+    "nl": "\u00b0C"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/temperature.svg",
+  "decimals": 1
+}

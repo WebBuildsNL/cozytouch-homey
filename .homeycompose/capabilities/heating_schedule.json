@@ -1,0 +1,11 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Heating Schedule (Today)",
+    "nl": "Verwarmingsschema (vandaag)"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/boost.svg"
+}

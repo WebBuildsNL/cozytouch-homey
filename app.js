@@ -199,7 +199,12 @@ module.exports = class CozytouchApp extends Homey.App {
    * Poll capabilities for all paired devices.
    */
   async _pollDevices() {
-    if (!this._api) return;
+    if (!this._api) {
+      // Try to reconnect if we lost the API connection
+      this.log('API not connected, attempting reconnect...');
+      this._reconnect().catch((err) => this.error('Reconnect failed:', err.message));
+      return;
+    }
 
     for (const [deviceId, deviceData] of this._devices) {
       try {
@@ -211,14 +216,12 @@ module.exports = class CozytouchApp extends Homey.App {
           this.log('Token expired, re-authenticating...');
           try {
             await this._api.authenticate();
-            // Retry this device
             const capabilities = await this._api.getCapabilities(deviceId);
             deviceData.capabilities = capabilities;
             this.homey.emit(`cozytouch.deviceUpdate.${deviceId}`, capabilities);
           } catch (authErr) {
-            this.error('Re-authentication failed:', authErr.message);
+            this.error('Re-authentication failed, will retry next poll:', authErr.message);
             this._api = null;
-            this._stopPolling();
             return;
           }
         } else {
