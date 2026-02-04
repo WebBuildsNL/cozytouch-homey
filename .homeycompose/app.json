@@ -1,0 +1,36 @@
+{
+  "id": "nl.webbuilds.cozytouch",
+  "version": "1.0.0",
+  "compatibility": ">=12.4.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Cozytouch"
+  },
+  "description": {
+    "en": "Control your Atlantic, Thermor, and Sauter devices via Cozytouch",
+    "nl": "Bedien je Atlantic, Thermor en Sauter apparaten via Cozytouch"
+  },
+  "category": [
+    "climate"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "brandColor": "#E63312",
+  "author": {
+    "name": "Dennis Smink",
+    "email": "dennissmink@gmail.com"
+  },
+  "api": {
+    "testCredentials": {
+      "method": "POST",
+      "path": "/test-credentials"
+    }
+  }
+}

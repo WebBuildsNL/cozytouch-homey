@@ -1,0 +1,16 @@
+{
+  "pair": {
+    "login_credentials": {
+      "title": "Log in bij Cozytouch",
+      "hint": "Voer je Atlantic Groupe / Cozytouch accountgegevens in."
+    }
+  },
+  "settings": {
+    "credentials": {
+      "title": "Cozytouch Inloggegevens",
+      "saved": "Inloggegevens opgeslagen.",
+      "test_success": "Verbinding geslaagd!",
+      "test_fail": "Verbinding mislukt. Controleer je inloggegevens."
+    }
+  }
+}

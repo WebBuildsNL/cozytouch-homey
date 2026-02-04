@@ -1,0 +1,40 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Swing Mode",
+    "nl": "Zwenkmodus"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "values": [
+    {
+      "id": "up",
+      "title": {
+        "en": "Up",
+        "nl": "Boven"
+      }
+    },
+    {
+      "id": "middle_up",
+      "title": {
+        "en": "Middle Up",
+        "nl": "Midden boven"
+      }
+    },
+    {
+      "id": "middle_down",
+      "title": {
+        "en": "Middle Down",
+        "nl": "Midden onder"
+      }
+    },
+    {
+      "id": "down",
+      "title": {
+        "en": "Down",
+        "nl": "Onder"
+      }
+    }
+  ]
+}

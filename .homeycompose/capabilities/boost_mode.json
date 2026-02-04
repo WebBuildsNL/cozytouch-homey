@@ -1,0 +1,20 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Boost Mode",
+    "nl": "Boostmodus"
+  },
+  "getable": true,
+  "setable": true,
+  "insights": true,
+  "insightsTitleTrue": {
+    "en": "Boost enabled",
+    "nl": "Boost ingeschakeld"
+  },
+  "insightsTitleFalse": {
+    "en": "Boost disabled",
+    "nl": "Boost uitgeschakeld"
+  },
+  "uiComponent": "toggle",
+  "icon": "/assets/boost.svg"
+}

@@ -1,0 +1,39 @@
+{
+  "title": {
+    "en": "Toggle away mode"
+  },
+  "titleFormatted": {
+    "en": "Turn away mode [[enabled]]"
+  },
+  "hint": {
+    "en": "Enable or disable away mode."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=boiler"
+    },
+    {
+      "type": "dropdown",
+      "name": "enabled",
+      "title": {
+        "en": "Enabled"
+      },
+      "values": [
+        {
+          "id": "true",
+          "label": {
+            "en": "On"
+          }
+        },
+        {
+          "id": "false",
+          "label": {
+            "en": "Off"
+          }
+        }
+      ]
+    }
+  ]
+}

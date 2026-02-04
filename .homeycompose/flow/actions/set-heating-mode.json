@@ -1,0 +1,45 @@
+{
+  "title": {
+    "en": "Set heating mode"
+  },
+  "titleFormatted": {
+    "en": "Set heating mode to [[mode]]"
+  },
+  "hint": {
+    "en": "Set the heating mode of the device."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=boiler|water-heater"
+    },
+    {
+      "type": "dropdown",
+      "name": "mode",
+      "title": {
+        "en": "Mode"
+      },
+      "values": [
+        {
+          "id": "manual",
+          "label": {
+            "en": "Manual"
+          }
+        },
+        {
+          "id": "eco_plus",
+          "label": {
+            "en": "Eco+"
+          }
+        },
+        {
+          "id": "prog",
+          "label": {
+            "en": "Program"
+          }
+        }
+      ]
+    }
+  ]
+}

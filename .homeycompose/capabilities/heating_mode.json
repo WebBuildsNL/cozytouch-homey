@@ -1,0 +1,33 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Heating Mode",
+    "nl": "Verwarmingsmodus"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "values": [
+    {
+      "id": "manual",
+      "title": {
+        "en": "Manual",
+        "nl": "Handmatig"
+      }
+    },
+    {
+      "id": "eco_plus",
+      "title": {
+        "en": "Eco+",
+        "nl": "Eco+"
+      }
+    },
+    {
+      "id": "prog",
+      "title": {
+        "en": "Program",
+        "nl": "Programma"
+      }
+    }
+  ]
+}

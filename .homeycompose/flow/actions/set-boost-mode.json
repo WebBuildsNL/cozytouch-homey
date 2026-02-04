@@ -1,0 +1,39 @@
+{
+  "title": {
+    "en": "Toggle boost mode"
+  },
+  "titleFormatted": {
+    "en": "Turn boost mode [[enabled]]"
+  },
+  "hint": {
+    "en": "Enable or disable boost mode."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=water-heater"
+    },
+    {
+      "type": "dropdown",
+      "name": "enabled",
+      "title": {
+        "en": "Enabled"
+      },
+      "values": [
+        {
+          "id": "true",
+          "label": {
+            "en": "On"
+          }
+        },
+        {
+          "id": "false",
+          "label": {
+            "en": "Off"
+          }
+        }
+      ]
+    }
+  ]
+}

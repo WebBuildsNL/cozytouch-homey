@@ -1,0 +1,19 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Hot Water Available",
+    "nl": "Warm water beschikbaar"
+  },
+  "units": {
+    "en": "%",
+    "nl": "%"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "uiComponent": "sensor",
+  "icon": "/assets/hot-water.svg",
+  "min": 0,
+  "max": 100,
+  "decimals": 0
+}

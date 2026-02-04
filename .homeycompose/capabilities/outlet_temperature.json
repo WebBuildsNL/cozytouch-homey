@@ -1,0 +1,17 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Outlet Temperature",
+    "nl": "Uitlaattemperatuur"
+  },
+  "units": {
+    "en": "\u00b0C",
+    "nl": "\u00b0C"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "uiComponent": "sensor",
+  "icon": "/assets/temperature.svg",
+  "decimals": 1
+}
