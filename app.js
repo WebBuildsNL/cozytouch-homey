@@ -62,6 +62,13 @@ module.exports = class CozytouchApp extends Homey.App {
         await device.setCapabilityValue('boost_mode', enabled);
       });
 
+    // Check boost mode condition
+    this.homey.flow.getConditionCard('boost-mode-active')
+      .registerRunListener(async (args) => {
+        const { device } = args;
+        return device.getCapabilityValue('boost_mode') === true;
+      });
+
     // Set away mode
     this.homey.flow.getActionCard('set-away-mode')
       .registerRunListener(async (args) => {

@@ -35,6 +35,26 @@
     }
   },
   "flow": {
+    "conditions": [
+      {
+        "title": {
+          "en": "Boost mode is !{{on|off}}",
+          "nl": "Boostmodus is !{{aan|uit}}"
+        },
+        "hint": {
+          "en": "Check if boost mode is currently active.",
+          "nl": "Controleer of de boostmodus momenteel actief is."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=water-heater"
+          }
+        ],
+        "id": "boost-mode-active"
+      }
+    ],
     "actions": [
       {
         "title": {
@@ -596,7 +616,7 @@
       },
       "getable": true,
       "setable": false,
-      "uiComponent": "sensor",
+      "uiComponent": null,
       "icon": "/assets/boost.svg"
     },
     "inlet_temperature": {
@@ -611,8 +631,8 @@
       },
       "getable": true,
       "setable": false,
-      "insights": true,
-      "uiComponent": "sensor",
+      "insights": false,
+      "uiComponent": null,
       "icon": "/assets/temperature.svg",
       "decimals": 1
     },
@@ -647,8 +667,8 @@
       },
       "getable": true,
       "setable": false,
-      "insights": true,
-      "uiComponent": "sensor",
+      "insights": false,
+      "uiComponent": null,
       "icon": "/assets/temperature.svg",
       "decimals": 1
     },

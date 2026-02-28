@@ -1,0 +1,17 @@
+{
+  "title": {
+    "en": "Boost mode is !{{on|off}}",
+    "nl": "Boostmodus is !{{aan|uit}}"
+  },
+  "hint": {
+    "en": "Check if boost mode is currently active.",
+    "nl": "Controleer of de boostmodus momenteel actief is."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=water-heater"
+    }
+  ]
+}

@@ -10,8 +10,8 @@
   },
   "getable": true,
   "setable": false,
-  "insights": true,
-  "uiComponent": "sensor",
+  "insights": false,
+  "uiComponent": null,
   "icon": "/assets/temperature.svg",
   "decimals": 1
 }
