@@ -11,10 +11,31 @@ This app connects to the Cozytouch cloud API and lets you monitor and control yo
 
 ## Installation
 
-1. Install the app from the [Homey App Store](https://homey.app/a/nl.webbuilds.cozytouch/)
-2. Open the app settings and enter your Cozytouch email and password
-3. Add a device via **Devices > + > Cozytouch** and select the device type
-4. Enter your credentials during pairing — your devices will be discovered automatically
+This app is **not yet available on the Homey App Store**. It must be installed manually using the Homey CLI.
+
+### Manual installation via Homey CLI
+
+1. Install the Homey CLI by following Athom's official guide: [Homey Apps SDK — Getting Started](https://apps.developer.homey.app/the-basics/getting-started)
+2. Clone this repository:
+   ```sh
+   git clone https://github.com/WebBuildsNL/cozytouch-homey.git
+   cd cozytouch-homey
+   npm install
+   ```
+3. Log in to your Homey account:
+   ```sh
+   homey login
+   ```
+4. Install the app on your Homey Pro:
+   ```sh
+   homey app install
+   ```
+
+### After installation
+
+1. Open the app settings and enter your Cozytouch email and password
+2. Add a device via **Devices > + > Cozytouch** and select the device type
+3. Enter your credentials during pairing — your devices will be discovered automatically
 
 ## Supported Device Types
 
