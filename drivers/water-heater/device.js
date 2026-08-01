@@ -8,6 +8,16 @@ const {
   homeyHeatingModeToApiValue,
 } = require('../../lib/cozytouch-capabilities');
 
+const WEEKDAY_TO_SCHEDULE_CAPABILITY = {
+  Mon: CapabilityId.SCHEDULE_MON,
+  Tue: CapabilityId.SCHEDULE_TUE,
+  Wed: CapabilityId.SCHEDULE_WED,
+  Thu: CapabilityId.SCHEDULE_THU,
+  Fri: CapabilityId.SCHEDULE_FRI,
+  Sat: CapabilityId.SCHEDULE_SAT,
+  Sun: CapabilityId.SCHEDULE_SUN,
+};
+
 module.exports = class WaterHeaterDevice extends Homey.Device {
 
   async onInit() {
@@ -17,13 +27,17 @@ module.exports = class WaterHeaterDevice extends Homey.Device {
 
     this.log(`Init water heater device: ${this._modelInfo.name} (model ${this._modelId}, device ${this._deviceId})`);
 
+    // Migrate to the dedicated waterheater device class
+    if (this.getClass() !== 'waterheater') {
+      await this.setClass('waterheater').catch((err) => {
+        this.error('Failed to update device class:', err.message);
+      });
+    }
+
     // Remove deprecated capabilities
     if (this.hasCapability('evaporator_temperature')) {
       await this.removeCapability('evaporator_temperature');
     }
-
-    // Add capabilities if not present (for devices paired before these were added)
-    // Remove deprecated capabilities
     if (this.hasCapability('measure_power')) {
       await this.removeCapability('measure_power');
     }
@@ -49,11 +63,18 @@ module.exports = class WaterHeaterDevice extends Homey.Device {
     this.homey.app.pollDevice(this._deviceId);
   }
 
+  _getApi() {
+    const api = this.homey.app.getApi();
+    if (!api) {
+      throw new Error('Not connected to Cozytouch. Check the credentials in the app settings.');
+    }
+    return api;
+  }
+
   _registerCapabilityListeners() {
     if (this.hasCapability('target_temperature')) {
       this.registerCapabilityListener('target_temperature', async (value) => {
-        const api = this.homey.app.getApi();
-        await api.setCapability(this._deviceId, CapabilityId.TARGET_TEMP_231, value);
+        await this._getApi().setCapability(this._deviceId, CapabilityId.TARGET_TEMP_231, value);
         this.homey.app.pollDevice(this._deviceId);
       });
     }
@@ -64,16 +85,22 @@ module.exports = class WaterHeaterDevice extends Homey.Device {
         if (apiValue === null) {
           throw new Error(`Unsupported heating mode: ${value}`);
         }
-        const api = this.homey.app.getApi();
-        await api.setCapability(this._deviceId, CapabilityId.HEATING_MODE, apiValue);
+        const previous = this.getCapabilityValue('heating_mode');
+        await this._getApi().setCapability(this._deviceId, CapabilityId.HEATING_MODE, apiValue);
+        if (previous !== null && previous !== value) {
+          this._fireChangeTriggers('heating_mode', value, previous);
+        }
         this.homey.app.pollDevice(this._deviceId);
       });
     }
 
     if (this.hasCapability('boost_mode')) {
       this.registerCapabilityListener('boost_mode', async (value) => {
-        const api = this.homey.app.getApi();
-        await api.setCapability(this._deviceId, CapabilityId.BOOST_MODE, value ? 1 : 0);
+        const previous = this.getCapabilityValue('boost_mode');
+        await this._getApi().setCapability(this._deviceId, CapabilityId.BOOST_MODE, value ? 1 : 0);
+        if (previous !== null && previous !== value) {
+          this._fireChangeTriggers('boost_mode', value, previous);
+        }
         this.homey.app.pollDevice(this._deviceId);
       });
     }
@@ -99,9 +126,13 @@ module.exports = class WaterHeaterDevice extends Homey.Device {
       if (mapped.capability === 'thermostat_mode') continue;
 
       if (this.hasCapability(mapped.capability)) {
+        const previous = this.getCapabilityValue(mapped.capability);
         this.setCapabilityValue(mapped.capability, mapped.value).catch((err) => {
           this.error(`Failed to set ${mapped.capability}:`, err.message);
         });
+        if (previous !== null && previous !== mapped.value) {
+          this._fireChangeTriggers(mapped.capability, mapped.value, previous);
+        }
 
         // Mirror water temperature to custom capability for stats overview
         if (mapped.capability === 'measure_temperature' && this.hasCapability('water_temperature')) {
@@ -116,13 +147,32 @@ module.exports = class WaterHeaterDevice extends Homey.Device {
     this._updateSchedule(capabilities);
   }
 
+  _fireChangeTriggers(capability, value, previous) {
+    if (capability === 'boost_mode') {
+      const card = value ? 'boost-mode-turned-on' : 'boost-mode-turned-off';
+      this.homey.flow.getDeviceTriggerCard(card)
+        .trigger(this)
+        .catch((err) => this.error(`Failed to trigger ${card}:`, err.message));
+    } else if (capability === 'heating_mode') {
+      this.homey.flow.getDeviceTriggerCard('heating-mode-changed')
+        .trigger(this, { mode: value })
+        .catch((err) => this.error('Failed to trigger heating-mode-changed:', err.message));
+    } else if (capability === 'measure_water') {
+      this.homey.flow.getDeviceTriggerCard('hot-water-below')
+        .trigger(this, { percentage: value }, { previous, current: value })
+        .catch((err) => this.error('Failed to trigger hot-water-below:', err.message));
+    }
+  }
+
   _updateSchedule(capabilities) {
     if (!this.hasCapability('heating_schedule')) return;
 
-    // Schedule capabilities: Mon=245, Tue=246, ..., Sun=251
-    const dayIndex = new Date().getDay(); // 0=Sun, 1=Mon, ..., 6=Sat
-    // Map JS day (0=Sun) to API day (Mon=245..Sun=251)
-    const scheduleCapId = dayIndex === 0 ? CapabilityId.SCHEDULE_SUN : 244 + dayIndex;
+    // Determine the current weekday in Homey's configured timezone; the
+    // system clock runs in UTC so new Date().getDay() would be off around midnight
+    const timezone = this.homey.clock.getTimezone();
+    const weekday = new Intl.DateTimeFormat('en-US', { weekday: 'short', timeZone: timezone }).format(new Date());
+    const scheduleCapId = WEEKDAY_TO_SCHEDULE_CAPABILITY[weekday];
+    if (!scheduleCapId) return;
 
     const scheduleCap = capabilities.find((c) => c.capabilityId === scheduleCapId);
     if (!scheduleCap) return;

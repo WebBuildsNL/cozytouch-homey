@@ -2,7 +2,7 @@
   "name": {
     "en": "Air Conditioner"
   },
-  "class": "thermostat",
+  "class": "airconditioning",
   "capabilities": [
     "thermostat_mode",
     "target_temperature",

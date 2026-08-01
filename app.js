@@ -3,13 +3,16 @@
 const Homey = require('homey');
 const CozytouchApi = require('./lib/cozytouch-api');
 const { getModelInfo, isUserFacingDevice } = require('./lib/cozytouch-models');
-const { CapabilityId, homeyHeatingModeToApiValue } = require('./lib/cozytouch-capabilities');
 
 const POLL_INTERVAL = 60 * 1000; // 60 seconds
 
 module.exports = class CozytouchApp extends Homey.App {
 
   async onInit() {
+    // Every device registers a deviceUpdate listener on this Homey instance;
+    // the default limit of 10 would log warnings for larger setups
+    this.homey.setMaxListeners(0);
+
     this._api = null;
     this._pollInterval = null;
     this._setupData = null;
@@ -40,48 +43,33 @@ module.exports = class CozytouchApp extends Homey.App {
   }
 
   _registerFlowCards() {
-    // Set heating mode
+    // Actions run through the device capability listeners so API guards,
+    // error messages and change triggers behave the same as UI interactions
     this.homey.flow.getActionCard('set-heating-mode')
       .registerRunListener(async (args) => {
-        const { device } = args;
-        const modelInfo = getModelInfo(device.getStoreValue('modelId'));
-        const apiValue = homeyHeatingModeToApiValue(args.mode, modelInfo);
-        if (apiValue === null) {
-          throw new Error(`Unsupported heating mode: ${args.mode}`);
-        }
-        await this._api.setCapability(device.getStoreValue('deviceId'), CapabilityId.HEATING_MODE, apiValue);
-        await device.setCapabilityValue('heating_mode', args.mode);
+        await args.device.triggerCapabilityListener('heating_mode', args.mode);
       });
 
-    // Set boost mode
     this.homey.flow.getActionCard('set-boost-mode')
       .registerRunListener(async (args) => {
-        const { device } = args;
-        const enabled = args.enabled === 'true';
-        await this._api.setCapability(device.getStoreValue('deviceId'), CapabilityId.BOOST_MODE, enabled ? 1 : 0);
-        await device.setCapabilityValue('boost_mode', enabled);
+        await args.device.triggerCapabilityListener('boost_mode', args.enabled === 'true');
+      });
+
+    this.homey.flow.getActionCard('set-away-mode')
+      .registerRunListener(async (args) => {
+        await args.device.triggerCapabilityListener('away_mode', args.enabled === 'true');
       });
 
     // Check boost mode condition
     this.homey.flow.getConditionCard('boost-mode-active')
       .registerRunListener(async (args) => {
-        const { device } = args;
-        return device.getCapabilityValue('boost_mode') === true;
+        return args.device.getCapabilityValue('boost_mode') === true;
       });
 
-    // Set away mode
-    this.homey.flow.getActionCard('set-away-mode')
-      .registerRunListener(async (args) => {
-        const { device } = args;
-        const enabled = args.enabled === 'true';
-        if (enabled) {
-          const now = Math.floor(Date.now() / 1000);
-          const oneWeek = 7 * 24 * 60 * 60;
-          await this._api.setAwayMode(this._setupData.id, this._setupData, now, now + oneWeek);
-        } else {
-          await this._api.setAwayMode(this._setupData.id, this._setupData, null, null);
-        }
-        await device.setCapabilityValue('away_mode', enabled);
+    // Hot water threshold trigger: only fire when the value crosses the threshold downwards
+    this.homey.flow.getDeviceTriggerCard('hot-water-below')
+      .registerRunListener(async (args, state) => {
+        return state.previous > args.percentage && state.current <= args.percentage;
       });
   }
 

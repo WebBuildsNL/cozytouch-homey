@@ -1,13 +1,15 @@
 {
   "name": "nl.webbuilds.cozytouch",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "app.js",
   "scripts": {
-    "lint": "eslint --ext .js,.ts --ignore-path .gitignore ."
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/homey": "npm:homey-apps-sdk-v3-types@^0.3.12",
-    "eslint": "^7.32.0",
-    "eslint-config-athom": "^3.1.5"
+    "eslint": "^10.8.0",
+    "eslint-plugin-homey-app": "^2.0.0",
+    "globals": "^17.8.0"
   }
 }

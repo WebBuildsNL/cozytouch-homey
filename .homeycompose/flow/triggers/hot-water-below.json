@@ -1,0 +1,46 @@
+{
+  "title": {
+    "en": "Hot water available dropped below...",
+    "nl": "Warm water beschikbaar zakte onder..."
+  },
+  "titleFormatted": {
+    "en": "Hot water available dropped below [[percentage]]%",
+    "nl": "Warm water beschikbaar zakte onder [[percentage]]%"
+  },
+  "hint": {
+    "en": "Triggers when the available hot water percentage drops below the given threshold.",
+    "nl": "Wordt getriggerd wanneer het percentage beschikbaar warm water onder de opgegeven grens zakt."
+  },
+  "tokens": [
+    {
+      "name": "percentage",
+      "type": "number",
+      "title": {
+        "en": "Percentage",
+        "nl": "Percentage"
+      },
+      "example": 45
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=water-heater"
+    },
+    {
+      "type": "number",
+      "name": "percentage",
+      "title": {
+        "en": "Percentage",
+        "nl": "Percentage"
+      },
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "placeholder": {
+        "en": "50"
+      }
+    }
+  ]
+}

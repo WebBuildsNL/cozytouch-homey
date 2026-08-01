@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "nl.webbuilds.cozytouch",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "compatibility": ">=12.4.0",
   "sdk": 3,
   "platforms": [
@@ -28,6 +28,11 @@
     "name": "Dennis Smink",
     "email": "dennissmink@gmail.com"
   },
+  "source": "https://github.com/WebBuildsNL/cozytouch-homey",
+  "support": "https://github.com/WebBuildsNL/cozytouch-homey/issues",
+  "bugs": {
+    "url": "https://github.com/WebBuildsNL/cozytouch-homey/issues"
+  },
   "api": {
     "testCredentials": {
       "method": "POST",
@@ -35,6 +40,122 @@
     }
   },
   "flow": {
+    "triggers": [
+      {
+        "title": {
+          "en": "Boost mode turned off",
+          "nl": "Boostmodus ging uit"
+        },
+        "hint": {
+          "en": "Triggers when boost mode is turned off.",
+          "nl": "Wordt getriggerd wanneer de boostmodus wordt uitgeschakeld."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=water-heater"
+          }
+        ],
+        "id": "boost-mode-turned-off"
+      },
+      {
+        "title": {
+          "en": "Boost mode turned on",
+          "nl": "Boostmodus ging aan"
+        },
+        "hint": {
+          "en": "Triggers when boost mode is turned on.",
+          "nl": "Wordt getriggerd wanneer de boostmodus wordt ingeschakeld."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=water-heater"
+          }
+        ],
+        "id": "boost-mode-turned-on"
+      },
+      {
+        "title": {
+          "en": "Heating mode changed",
+          "nl": "Verwarmingsmodus is veranderd"
+        },
+        "hint": {
+          "en": "Triggers when the heating mode changes.",
+          "nl": "Wordt getriggerd wanneer de verwarmingsmodus verandert."
+        },
+        "tokens": [
+          {
+            "name": "mode",
+            "type": "string",
+            "title": {
+              "en": "Mode",
+              "nl": "Modus"
+            },
+            "example": {
+              "en": "eco_plus"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=boiler|water-heater"
+          }
+        ],
+        "id": "heating-mode-changed"
+      },
+      {
+        "title": {
+          "en": "Hot water available dropped below...",
+          "nl": "Warm water beschikbaar zakte onder..."
+        },
+        "titleFormatted": {
+          "en": "Hot water available dropped below [[percentage]]%",
+          "nl": "Warm water beschikbaar zakte onder [[percentage]]%"
+        },
+        "hint": {
+          "en": "Triggers when the available hot water percentage drops below the given threshold.",
+          "nl": "Wordt getriggerd wanneer het percentage beschikbaar warm water onder de opgegeven grens zakt."
+        },
+        "tokens": [
+          {
+            "name": "percentage",
+            "type": "number",
+            "title": {
+              "en": "Percentage",
+              "nl": "Percentage"
+            },
+            "example": 45
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=water-heater"
+          },
+          {
+            "type": "number",
+            "name": "percentage",
+            "title": {
+              "en": "Percentage",
+              "nl": "Percentage"
+            },
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "placeholder": {
+              "en": "50"
+            }
+          }
+        ],
+        "id": "hot-water-below"
+      }
+    ],
     "conditions": [
       {
         "title": {
@@ -189,7 +310,7 @@
       "name": {
         "en": "Air Conditioner"
       },
-      "class": "thermostat",
+      "class": "airconditioning",
       "capabilities": [
         "thermostat_mode",
         "target_temperature",
@@ -279,6 +400,8 @@
         "thermostat_mode",
         "target_temperature",
         "measure_temperature",
+        "water_temperature",
+        "outside_temperature",
         "heating_mode",
         "away_mode",
         "meter_power"
@@ -353,7 +476,7 @@
       "name": {
         "en": "Towel Rack"
       },
-      "class": "heater",
+      "class": "radiator",
       "capabilities": [
         "onoff",
         "measure_temperature"
@@ -399,7 +522,7 @@
       "name": {
         "en": "Water Heater"
       },
-      "class": "heater",
+      "class": "waterheater",
       "capabilities": [
         "target_temperature",
         "measure_temperature",
@@ -669,6 +792,23 @@
       "setable": false,
       "insights": false,
       "uiComponent": null,
+      "icon": "/assets/temperature.svg",
+      "decimals": 1
+    },
+    "outside_temperature": {
+      "type": "number",
+      "title": {
+        "en": "Outside Temperature",
+        "nl": "Buitentemperatuur"
+      },
+      "units": {
+        "en": "°C",
+        "nl": "°C"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "uiComponent": "sensor",
       "icon": "/assets/temperature.svg",
       "decimals": 1
     },

@@ -19,10 +19,25 @@ module.exports = class AirConditionerDevice extends Homey.Device {
 
     this.log(`Init AC device: ${this._modelInfo.name} (model ${this._modelId}, device ${this._deviceId})`);
 
+    // Migrate to the dedicated airconditioning device class
+    if (this.getClass() !== 'airconditioning') {
+      await this.setClass('airconditioning').catch((err) => {
+        this.error('Failed to update device class:', err.message);
+      });
+    }
+
     this._registerCapabilityListeners();
     this._registerPollListener();
 
     this.homey.app.pollDevice(this._deviceId);
+  }
+
+  _getApi() {
+    const api = this.homey.app.getApi();
+    if (!api) {
+      throw new Error('Not connected to Cozytouch. Check the credentials in the app settings.');
+    }
+    return api;
   }
 
   _registerCapabilityListeners() {
@@ -33,16 +48,14 @@ module.exports = class AirConditionerDevice extends Homey.Device {
           throw new Error(`Unsupported mode: ${value}`);
         }
         const capId = this._modelInfo.hvacModesCapabilityId[0];
-        const api = this.homey.app.getApi();
-        await api.setCapability(this._deviceId, capId, apiValue);
+        await this._getApi().setCapability(this._deviceId, capId, apiValue);
         this.homey.app.pollDevice(this._deviceId);
       });
     }
 
     if (this.hasCapability('target_temperature')) {
       this.registerCapabilityListener('target_temperature', async (value) => {
-        const api = this.homey.app.getApi();
-        await api.setCapability(this._deviceId, CapabilityId.TARGET_TEMP, value);
+        await this._getApi().setCapability(this._deviceId, CapabilityId.TARGET_TEMP, value);
         this.homey.app.pollDevice(this._deviceId);
       });
     }
@@ -53,8 +66,7 @@ module.exports = class AirConditionerDevice extends Homey.Device {
         if (apiValue === null) {
           throw new Error(`Unsupported fan mode: ${value}`);
         }
-        const api = this.homey.app.getApi();
-        await api.setCapability(this._deviceId, CapabilityId.FAN_MODE, apiValue);
+        await this._getApi().setCapability(this._deviceId, CapabilityId.FAN_MODE, apiValue);
         this.homey.app.pollDevice(this._deviceId);
       });
     }
@@ -65,8 +77,7 @@ module.exports = class AirConditionerDevice extends Homey.Device {
         if (apiValue === null) {
           throw new Error(`Unsupported swing mode: ${value}`);
         }
-        const api = this.homey.app.getApi();
-        await api.setCapability(this._deviceId, CapabilityId.SWING_MODE, apiValue);
+        await this._getApi().setCapability(this._deviceId, CapabilityId.SWING_MODE, apiValue);
         this.homey.app.pollDevice(this._deviceId);
       });
     }

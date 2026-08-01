@@ -1,0 +1,17 @@
+{
+  "title": {
+    "en": "Boost mode turned on",
+    "nl": "Boostmodus ging aan"
+  },
+  "hint": {
+    "en": "Triggers when boost mode is turned on.",
+    "nl": "Wordt getriggerd wanneer de boostmodus wordt ingeschakeld."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=water-heater"
+    }
+  ]
+}

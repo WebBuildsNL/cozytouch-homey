@@ -49,4 +49,4 @@ Each driver lives in `drivers/<driver-id>/` and typically contains:
 
 ### ESLint
 
-Uses `eslint-config-athom` with the `homey-app` preset. Run `npm run lint` before submitting.
+Uses ESLint 10 flat config (`eslint.config.js`) with `@eslint/js` recommended plus `eslint-plugin-homey-app`. Run `npm run lint` before submitting.

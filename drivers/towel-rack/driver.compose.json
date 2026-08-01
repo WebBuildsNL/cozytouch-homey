@@ -2,7 +2,7 @@
   "name": {
     "en": "Towel Rack"
   },
-  "class": "heater",
+  "class": "radiator",
   "capabilities": [
     "onoff",
     "measure_temperature"

@@ -1,0 +1,30 @@
+{
+  "title": {
+    "en": "Heating mode changed",
+    "nl": "Verwarmingsmodus is veranderd"
+  },
+  "hint": {
+    "en": "Triggers when the heating mode changes.",
+    "nl": "Wordt getriggerd wanneer de verwarmingsmodus verandert."
+  },
+  "tokens": [
+    {
+      "name": "mode",
+      "type": "string",
+      "title": {
+        "en": "Mode",
+        "nl": "Modus"
+      },
+      "example": {
+        "en": "eco_plus"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=boiler|water-heater"
+    }
+  ]
+}

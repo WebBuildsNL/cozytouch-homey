@@ -1,6 +1,6 @@
 {
   "id": "nl.webbuilds.cozytouch",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "compatibility": ">=12.4.0",
   "sdk": 3,
   "platforms": [
@@ -26,6 +26,11 @@
   "author": {
     "name": "Dennis Smink",
     "email": "dennissmink@gmail.com"
+  },
+  "source": "https://github.com/WebBuildsNL/cozytouch-homey",
+  "support": "https://github.com/WebBuildsNL/cozytouch-homey/issues",
+  "bugs": {
+    "url": "https://github.com/WebBuildsNL/cozytouch-homey/issues"
   },
   "api": {
     "testCredentials": {

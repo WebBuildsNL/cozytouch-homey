@@ -43,6 +43,7 @@ This app is **not yet available on the Homey App Store**. It must be installed m
 
 | Brand | Model |
 |-------|-------|
+| Atlantic | Explorer V5 200L |
 | Atlantic | Explorer V5 270L |
 | Atlantic | Explorer V5 240L |
 | Atlantic | Explorer V5 270L Coil |
@@ -53,6 +54,7 @@ This app is **not yet available on the Homey App Store**. It must be installed m
 | Thermor | Aeromax SPLIT 3 |
 | Thermor | Aeromax 6 |
 | Thermor | Malicio 3 120L |
+| Thermor | Lineo Connecte MP 100L |
 | Sauter | Phazy |
 
 **Capabilities:** target temperature, water temperature, hot water availability (%), heating mode (Manual / Eco+ / Program), boost mode, energy consumption (kWh).
@@ -106,6 +108,12 @@ This app is **not yet available on the Homey App Store**. It must be installed m
 **Capabilities:** on/off, current temperature.
 
 ## Flow Cards
+
+### Triggers (WHEN)
+
+- **Boost mode turned on / off** — When boost mode changes on a water heater
+- **Heating mode changed** — When the heating mode changes (water heater / boiler), with a mode tag
+- **Hot water available dropped below...** — When the available hot water percentage drops below a chosen threshold
 
 ### Conditions (AND)
 

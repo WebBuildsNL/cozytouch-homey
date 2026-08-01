@@ -7,6 +7,8 @@
     "thermostat_mode",
     "target_temperature",
     "measure_temperature",
+    "water_temperature",
+    "outside_temperature",
     "heating_mode",
     "away_mode",
     "meter_power"
