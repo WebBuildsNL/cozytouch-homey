@@ -1,12 +1,15 @@
 {
   "title": {
-    "en": "Toggle away mode"
+    "en": "Toggle away mode",
+    "nl": "Afwezigheidsmodus schakelen"
   },
   "titleFormatted": {
-    "en": "Turn away mode [[enabled]]"
+    "en": "Turn away mode [[enabled]]",
+    "nl": "Zet afwezigheidsmodus [[enabled]]"
   },
   "hint": {
-    "en": "Enable or disable away mode."
+    "en": "Enable or disable away mode.",
+    "nl": "Schakel de afwezigheidsmodus in of uit."
   },
   "args": [
     {
@@ -18,19 +21,22 @@
       "type": "dropdown",
       "name": "enabled",
       "title": {
-        "en": "Enabled"
+        "en": "Enabled",
+        "nl": "Ingeschakeld"
       },
       "values": [
         {
           "id": "true",
           "label": {
-            "en": "On"
+            "en": "on",
+            "nl": "aan"
           }
         },
         {
           "id": "false",
           "label": {
-            "en": "Off"
+            "en": "off",
+            "nl": "uit"
           }
         }
       ]

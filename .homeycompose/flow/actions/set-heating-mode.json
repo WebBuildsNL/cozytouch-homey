@@ -1,12 +1,15 @@
 {
   "title": {
-    "en": "Set heating mode"
+    "en": "Set heating mode",
+    "nl": "Verwarmingsmodus instellen"
   },
   "titleFormatted": {
-    "en": "Set heating mode to [[mode]]"
+    "en": "Set heating mode to [[mode]]",
+    "nl": "Zet verwarmingsmodus op [[mode]]"
   },
   "hint": {
-    "en": "Set the heating mode of the device."
+    "en": "Set the heating mode of the device.",
+    "nl": "Stel de verwarmingsmodus van het apparaat in."
   },
   "args": [
     {
@@ -18,25 +21,29 @@
       "type": "dropdown",
       "name": "mode",
       "title": {
-        "en": "Mode"
+        "en": "Mode",
+        "nl": "Modus"
       },
       "values": [
         {
           "id": "manual",
           "label": {
-            "en": "Manual"
+            "en": "Manual",
+            "nl": "Handmatig"
           }
         },
         {
           "id": "eco_plus",
           "label": {
-            "en": "Eco+"
+            "en": "Eco+",
+            "nl": "Eco+"
           }
         },
         {
           "id": "prog",
           "label": {
-            "en": "Program"
+            "en": "Program",
+            "nl": "Programma"
           }
         }
       ]

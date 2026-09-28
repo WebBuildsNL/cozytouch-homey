@@ -5,12 +5,25 @@
       "hint": "Enter your Atlantic Groupe / Cozytouch account credentials."
     }
   },
+  "errors": {
+    "not_connected": "Not connected to Cozytouch. Check the credentials in the app settings."
+  },
   "settings": {
     "credentials": {
       "title": "Cozytouch Credentials",
+      "intro": "Enter your Atlantic Groupe / Cozytouch account credentials. These are the same credentials you use for the Cozytouch mobile app.",
+      "email": "Email",
+      "email_placeholder": "your@email.com",
+      "password": "Password",
+      "password_placeholder": "Your password",
+      "save": "Save",
+      "test": "Test connection",
+      "missing": "Please enter both email and password.",
+      "save_failed": "Failed to save credentials: __error__",
       "saved": "Credentials saved successfully.",
-      "test_success": "Connection successful!",
-      "test_fail": "Connection failed. Please check your credentials."
+      "testing": "Testing connection...",
+      "test_success": "Connection successful! Found __count__ device(s).",
+      "test_fail": "Connection failed: __error__"
     }
   }
 }

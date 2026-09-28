@@ -1,6 +1,7 @@
 {
   "name": {
-    "en": "Towel Rack"
+    "en": "Towel Rack",
+    "nl": "Handdoekradiator"
   },
   "class": "radiator",
   "capabilities": [
@@ -13,16 +14,20 @@
       "template": "login_credentials",
       "options": {
         "usernameLabel": {
-          "en": "Email"
+          "en": "Email",
+          "nl": "E-mail"
         },
         "usernamePlaceholder": {
-          "en": "your@email.com"
+          "en": "your@email.com",
+          "nl": "jouw@email.nl"
         },
         "passwordLabel": {
-          "en": "Password"
+          "en": "Password",
+          "nl": "Wachtwoord"
         },
         "passwordPlaceholder": {
-          "en": "Your Cozytouch password"
+          "en": "Your Cozytouch password",
+          "nl": "Je Cozytouch-wachtwoord"
         }
       }
     },
@@ -40,6 +45,7 @@
   ],
   "images": {
     "small": "/drivers/towel-rack/assets/small.png",
-    "large": "/drivers/towel-rack/assets/large.png"
+    "large": "/drivers/towel-rack/assets/large.png",
+    "xlarge": "/drivers/towel-rack/assets/xlarge.png"
   }
 }

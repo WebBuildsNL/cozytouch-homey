@@ -1,6 +1,7 @@
 {
   "1.0.0": {
-    "en": "First version!"
+    "en": "First version!",
+    "nl": "Eerste versie!"
   },
   "1.1.0": {
     "en": "Added Atlantic Explorer V5 200L, Thermor Lineo Connecte and more air conditioner models. New flow triggers for boost mode, heating mode and hot water level. Improved device icons and fixed temperature readings for boilers and the schedule display around midnight.",

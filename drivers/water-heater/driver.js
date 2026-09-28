@@ -9,7 +9,7 @@ module.exports = class WaterHeaterDriver extends Homey.Driver {
   async onPairListDevices() {
     const api = this.homey.app.getApi();
     if (!api) {
-      throw new Error('Not connected to Cozytouch. Please configure credentials in app settings.');
+      throw new Error(this.homey.__('errors.not_connected'));
     }
 
     const devices = this.homey.app.getDevices();

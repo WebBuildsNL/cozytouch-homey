@@ -1,6 +1,7 @@
 {
   "name": {
-    "en": "Water Heater"
+    "en": "Water Heater",
+    "nl": "Boiler"
   },
   "class": "waterheater",
   "capabilities": [
@@ -35,16 +36,20 @@
       "template": "login_credentials",
       "options": {
         "usernameLabel": {
-          "en": "Email"
+          "en": "Email",
+          "nl": "E-mail"
         },
         "usernamePlaceholder": {
-          "en": "your@email.com"
+          "en": "your@email.com",
+          "nl": "jouw@email.nl"
         },
         "passwordLabel": {
-          "en": "Password"
+          "en": "Password",
+          "nl": "Wachtwoord"
         },
         "passwordPlaceholder": {
-          "en": "Your Cozytouch password"
+          "en": "Your Cozytouch password",
+          "nl": "Je Cozytouch-wachtwoord"
         }
       }
     },
@@ -62,6 +67,7 @@
   ],
   "images": {
     "small": "/drivers/water-heater/assets/small.png",
-    "large": "/drivers/water-heater/assets/large.png"
+    "large": "/drivers/water-heater/assets/large.png",
+    "xlarge": "/drivers/water-heater/assets/xlarge.png"
   }
 }

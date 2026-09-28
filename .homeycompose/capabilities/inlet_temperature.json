@@ -5,8 +5,8 @@
     "nl": "Inlaattemperatuur"
   },
   "units": {
-    "en": "\u00b0C",
-    "nl": "\u00b0C"
+    "en": "°C",
+    "nl": "°C"
   },
   "getable": true,
   "setable": false,

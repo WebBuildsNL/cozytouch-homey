@@ -1,6 +1,7 @@
 {
   "name": {
-    "en": "Boiler / Heat Pump"
+    "en": "Boiler / Heat Pump",
+    "nl": "Cv-ketel / warmtepomp"
   },
   "class": "thermostat",
   "capabilities": [
@@ -19,19 +20,22 @@
         {
           "id": "off",
           "title": {
-            "en": "Off"
+            "en": "Off",
+            "nl": "Uit"
           }
         },
         {
           "id": "heat",
           "title": {
-            "en": "Heat"
+            "en": "Heat",
+            "nl": "Verwarmen"
           }
         },
         {
           "id": "auto",
           "title": {
-            "en": "Auto"
+            "en": "Auto",
+            "nl": "Auto"
           }
         }
       ]
@@ -48,16 +52,20 @@
       "template": "login_credentials",
       "options": {
         "usernameLabel": {
-          "en": "Email"
+          "en": "Email",
+          "nl": "E-mail"
         },
         "usernamePlaceholder": {
-          "en": "your@email.com"
+          "en": "your@email.com",
+          "nl": "jouw@email.nl"
         },
         "passwordLabel": {
-          "en": "Password"
+          "en": "Password",
+          "nl": "Wachtwoord"
         },
         "passwordPlaceholder": {
-          "en": "Your Cozytouch password"
+          "en": "Your Cozytouch password",
+          "nl": "Je Cozytouch-wachtwoord"
         }
       }
     },
@@ -75,6 +83,7 @@
   ],
   "images": {
     "small": "/drivers/boiler/assets/small.png",
-    "large": "/drivers/boiler/assets/large.png"
+    "large": "/drivers/boiler/assets/large.png",
+    "xlarge": "/drivers/boiler/assets/xlarge.png"
   }
 }

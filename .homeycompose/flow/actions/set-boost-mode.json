@@ -1,12 +1,15 @@
 {
   "title": {
-    "en": "Toggle boost mode"
+    "en": "Toggle boost mode",
+    "nl": "Boostmodus schakelen"
   },
   "titleFormatted": {
-    "en": "Turn boost mode [[enabled]]"
+    "en": "Turn boost mode [[enabled]]",
+    "nl": "Zet boostmodus [[enabled]]"
   },
   "hint": {
-    "en": "Enable or disable boost mode."
+    "en": "Enable or disable boost mode.",
+    "nl": "Schakel de boostmodus in of uit."
   },
   "args": [
     {
@@ -18,19 +21,22 @@
       "type": "dropdown",
       "name": "enabled",
       "title": {
-        "en": "Enabled"
+        "en": "Enabled",
+        "nl": "Ingeschakeld"
       },
       "values": [
         {
           "id": "true",
           "label": {
-            "en": "On"
+            "en": "on",
+            "nl": "aan"
           }
         },
         {
           "id": "false",
           "label": {
-            "en": "Off"
+            "en": "off",
+            "nl": "uit"
           }
         }
       ]

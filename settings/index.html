@@ -69,24 +69,22 @@
   </style>
 </head>
 <body>
-  <p class="info">
-    Enter your Atlantic Groupe / Cozytouch account credentials.
-    These are the same credentials you use for the Cozytouch mobile app.
-  </p>
+  <h1 class="homey-title" data-i18n="settings.credentials.title"></h1>
+  <p class="info" data-i18n="settings.credentials.intro"></p>
 
   <div class="form-group">
-    <label for="username">Email</label>
-    <input type="text" id="username" placeholder="your@email.com" autocomplete="email" />
+    <label for="username" data-i18n="settings.credentials.email"></label>
+    <input type="text" id="username" autocomplete="email" />
   </div>
 
   <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" id="password" placeholder="Your password" autocomplete="current-password" />
+    <label for="password" data-i18n="settings.credentials.password"></label>
+    <input type="password" id="password" autocomplete="current-password" />
   </div>
 
   <div>
-    <button class="btn-save" id="btn-save">Save</button>
-    <button class="btn-test" id="btn-test">Test Connection</button>
+    <button class="btn-save" id="btn-save" data-i18n="settings.credentials.save"></button>
+    <button class="btn-test" id="btn-test" data-i18n="settings.credentials.test"></button>
   </div>
 
   <div class="status" id="status"></div>
@@ -98,6 +96,9 @@
       var usernameEl = document.getElementById('username');
       var passwordEl = document.getElementById('password');
       var statusEl = document.getElementById('status');
+
+      usernameEl.placeholder = Homey.__('settings.credentials.email_placeholder');
+      passwordEl.placeholder = Homey.__('settings.credentials.password_placeholder');
 
       // Load existing credentials
       Homey.get('username', function(err, value) {
@@ -117,21 +118,21 @@
         var password = passwordEl.value.trim();
 
         if (!username || !password) {
-          setStatus('Please enter both email and password.', 'error');
+          setStatus(Homey.__('settings.credentials.missing'), 'error');
           return;
         }
 
         Homey.set('username', username, function(err) {
           if (err) {
-            setStatus('Failed to save email: ' + err.message, 'error');
+            setStatus(Homey.__('settings.credentials.save_failed', { error: err.message }), 'error');
             return;
           }
           Homey.set('password', password, function(err2) {
             if (err2) {
-              setStatus('Failed to save password: ' + err2.message, 'error');
+              setStatus(Homey.__('settings.credentials.save_failed', { error: err2.message }), 'error');
               return;
             }
-            setStatus('Credentials saved successfully.', 'success');
+            setStatus(Homey.__('settings.credentials.saved'), 'success');
           });
         });
       });
@@ -141,17 +142,17 @@
         var password = passwordEl.value.trim();
 
         if (!username || !password) {
-          setStatus('Please enter both email and password.', 'error');
+          setStatus(Homey.__('settings.credentials.missing'), 'error');
           return;
         }
 
-        setStatus('Testing connection...', 'loading');
+        setStatus(Homey.__('settings.credentials.testing'), 'loading');
 
         Homey.api('POST', '/test-credentials', { username: username, password: password }, function(err, result) {
           if (err) {
-            setStatus('Connection failed: ' + (err.message || err), 'error');
+            setStatus(Homey.__('settings.credentials.test_fail', { error: err.message || err }), 'error');
           } else {
-            setStatus('Connection successful! Found ' + result.deviceCount + ' device(s).', 'success');
+            setStatus(Homey.__('settings.credentials.test_success', { count: result.deviceCount }), 'success');
           }
         });
       });

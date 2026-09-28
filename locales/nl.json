@@ -5,12 +5,25 @@
       "hint": "Voer je Atlantic Groupe / Cozytouch accountgegevens in."
     }
   },
+  "errors": {
+    "not_connected": "Niet verbonden met Cozytouch. Controleer de inloggegevens in de app-instellingen."
+  },
   "settings": {
     "credentials": {
       "title": "Cozytouch Inloggegevens",
+      "intro": "Voer je Atlantic Groupe / Cozytouch accountgegevens in. Dit zijn dezelfde gegevens die je gebruikt voor de Cozytouch-app.",
+      "email": "E-mail",
+      "email_placeholder": "jouw@email.nl",
+      "password": "Wachtwoord",
+      "password_placeholder": "Je wachtwoord",
+      "save": "Opslaan",
+      "test": "Verbinding testen",
+      "missing": "Vul zowel je e-mailadres als je wachtwoord in.",
+      "save_failed": "Opslaan van inloggegevens mislukt: __error__",
       "saved": "Inloggegevens opgeslagen.",
-      "test_success": "Verbinding geslaagd!",
-      "test_fail": "Verbinding mislukt. Controleer je inloggegevens."
+      "testing": "Verbinding testen...",
+      "test_success": "Verbinding geslaagd! __count__ apparaat/apparaten gevonden.",
+      "test_fail": "Verbinding mislukt: __error__"
     }
   }
 }

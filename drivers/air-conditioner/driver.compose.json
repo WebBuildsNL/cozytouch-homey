@@ -1,6 +1,7 @@
 {
   "name": {
-    "en": "Air Conditioner"
+    "en": "Air Conditioner",
+    "nl": "Airco"
   },
   "class": "airconditioning",
   "capabilities": [
@@ -17,25 +18,29 @@
         {
           "id": "off",
           "title": {
-            "en": "Off"
+            "en": "Off",
+            "nl": "Uit"
           }
         },
         {
           "id": "auto",
           "title": {
-            "en": "Auto"
+            "en": "Auto",
+            "nl": "Auto"
           }
         },
         {
           "id": "cool",
           "title": {
-            "en": "Cool"
+            "en": "Cool",
+            "nl": "Koelen"
           }
         },
         {
           "id": "heat",
           "title": {
-            "en": "Heat"
+            "en": "Heat",
+            "nl": "Verwarmen"
           }
         }
       ]
@@ -52,16 +57,20 @@
       "template": "login_credentials",
       "options": {
         "usernameLabel": {
-          "en": "Email"
+          "en": "Email",
+          "nl": "E-mail"
         },
         "usernamePlaceholder": {
-          "en": "your@email.com"
+          "en": "your@email.com",
+          "nl": "jouw@email.nl"
         },
         "passwordLabel": {
-          "en": "Password"
+          "en": "Password",
+          "nl": "Wachtwoord"
         },
         "passwordPlaceholder": {
-          "en": "Your Cozytouch password"
+          "en": "Your Cozytouch password",
+          "nl": "Je Cozytouch-wachtwoord"
         }
       }
     },
@@ -79,6 +88,7 @@
   ],
   "images": {
     "small": "/drivers/air-conditioner/assets/small.png",
-    "large": "/drivers/air-conditioner/assets/large.png"
+    "large": "/drivers/air-conditioner/assets/large.png",
+    "xlarge": "/drivers/air-conditioner/assets/xlarge.png"
   }
 }

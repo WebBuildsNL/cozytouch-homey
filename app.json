@@ -8,20 +8,21 @@
     "local"
   ],
   "name": {
-    "en": "Cozytouch"
+    "en": "Cozytouch",
+    "nl": "Cozytouch"
   },
   "description": {
-    "en": "Control your Atlantic, Thermor, and Sauter devices via Cozytouch",
-    "nl": "Bedien je Atlantic, Thermor en Sauter apparaten via Cozytouch"
+    "en": "Heating, hot water and cooling from Atlantic, Thermor and Sauter",
+    "nl": "Verwarming, warm water en koeling van Atlantic, Thermor en Sauter"
   },
   "category": [
     "climate"
   ],
   "permissions": [],
   "images": {
-    "small": "/assets/images/small.png",
-    "large": "/assets/images/large.png",
-    "xlarge": "/assets/images/xlarge.png"
+    "small": "/assets/images/small.jpg",
+    "large": "/assets/images/large.jpg",
+    "xlarge": "/assets/images/xlarge.jpg"
   },
   "brandColor": "#E63312",
   "author": {
@@ -95,7 +96,8 @@
               "nl": "Modus"
             },
             "example": {
-              "en": "eco_plus"
+              "en": "eco_plus",
+              "nl": "eco_plus"
             }
           }
         ],
@@ -149,7 +151,8 @@
             "max": 100,
             "step": 1,
             "placeholder": {
-              "en": "50"
+              "en": "50",
+              "nl": "50"
             }
           }
         ],
@@ -179,13 +182,16 @@
     "actions": [
       {
         "title": {
-          "en": "Toggle away mode"
+          "en": "Toggle away mode",
+          "nl": "Afwezigheidsmodus schakelen"
         },
         "titleFormatted": {
-          "en": "Turn away mode [[enabled]]"
+          "en": "Turn away mode [[enabled]]",
+          "nl": "Zet afwezigheidsmodus [[enabled]]"
         },
         "hint": {
-          "en": "Enable or disable away mode."
+          "en": "Enable or disable away mode.",
+          "nl": "Schakel de afwezigheidsmodus in of uit."
         },
         "args": [
           {
@@ -197,19 +203,22 @@
             "type": "dropdown",
             "name": "enabled",
             "title": {
-              "en": "Enabled"
+              "en": "Enabled",
+              "nl": "Ingeschakeld"
             },
             "values": [
               {
                 "id": "true",
                 "label": {
-                  "en": "On"
+                  "en": "on",
+                  "nl": "aan"
                 }
               },
               {
                 "id": "false",
                 "label": {
-                  "en": "Off"
+                  "en": "off",
+                  "nl": "uit"
                 }
               }
             ]
@@ -219,13 +228,16 @@
       },
       {
         "title": {
-          "en": "Toggle boost mode"
+          "en": "Toggle boost mode",
+          "nl": "Boostmodus schakelen"
         },
         "titleFormatted": {
-          "en": "Turn boost mode [[enabled]]"
+          "en": "Turn boost mode [[enabled]]",
+          "nl": "Zet boostmodus [[enabled]]"
         },
         "hint": {
-          "en": "Enable or disable boost mode."
+          "en": "Enable or disable boost mode.",
+          "nl": "Schakel de boostmodus in of uit."
         },
         "args": [
           {
@@ -237,19 +249,22 @@
             "type": "dropdown",
             "name": "enabled",
             "title": {
-              "en": "Enabled"
+              "en": "Enabled",
+              "nl": "Ingeschakeld"
             },
             "values": [
               {
                 "id": "true",
                 "label": {
-                  "en": "On"
+                  "en": "on",
+                  "nl": "aan"
                 }
               },
               {
                 "id": "false",
                 "label": {
-                  "en": "Off"
+                  "en": "off",
+                  "nl": "uit"
                 }
               }
             ]
@@ -259,13 +274,16 @@
       },
       {
         "title": {
-          "en": "Set heating mode"
+          "en": "Set heating mode",
+          "nl": "Verwarmingsmodus instellen"
         },
         "titleFormatted": {
-          "en": "Set heating mode to [[mode]]"
+          "en": "Set heating mode to [[mode]]",
+          "nl": "Zet verwarmingsmodus op [[mode]]"
         },
         "hint": {
-          "en": "Set the heating mode of the device."
+          "en": "Set the heating mode of the device.",
+          "nl": "Stel de verwarmingsmodus van het apparaat in."
         },
         "args": [
           {
@@ -277,25 +295,29 @@
             "type": "dropdown",
             "name": "mode",
             "title": {
-              "en": "Mode"
+              "en": "Mode",
+              "nl": "Modus"
             },
             "values": [
               {
                 "id": "manual",
                 "label": {
-                  "en": "Manual"
+                  "en": "Manual",
+                  "nl": "Handmatig"
                 }
               },
               {
                 "id": "eco_plus",
                 "label": {
-                  "en": "Eco+"
+                  "en": "Eco+",
+                  "nl": "Eco+"
                 }
               },
               {
                 "id": "prog",
                 "label": {
-                  "en": "Program"
+                  "en": "Program",
+                  "nl": "Programma"
                 }
               }
             ]
@@ -308,7 +330,8 @@
   "drivers": [
     {
       "name": {
-        "en": "Air Conditioner"
+        "en": "Air Conditioner",
+        "nl": "Airco"
       },
       "class": "airconditioning",
       "capabilities": [
@@ -325,25 +348,29 @@
             {
               "id": "off",
               "title": {
-                "en": "Off"
+                "en": "Off",
+                "nl": "Uit"
               }
             },
             {
               "id": "auto",
               "title": {
-                "en": "Auto"
+                "en": "Auto",
+                "nl": "Auto"
               }
             },
             {
               "id": "cool",
               "title": {
-                "en": "Cool"
+                "en": "Cool",
+                "nl": "Koelen"
               }
             },
             {
               "id": "heat",
               "title": {
-                "en": "Heat"
+                "en": "Heat",
+                "nl": "Verwarmen"
               }
             }
           ]
@@ -360,16 +387,20 @@
           "template": "login_credentials",
           "options": {
             "usernameLabel": {
-              "en": "Email"
+              "en": "Email",
+              "nl": "E-mail"
             },
             "usernamePlaceholder": {
-              "en": "your@email.com"
+              "en": "your@email.com",
+              "nl": "jouw@email.nl"
             },
             "passwordLabel": {
-              "en": "Password"
+              "en": "Password",
+              "nl": "Wachtwoord"
             },
             "passwordPlaceholder": {
-              "en": "Your Cozytouch password"
+              "en": "Your Cozytouch password",
+              "nl": "Je Cozytouch-wachtwoord"
             }
           }
         },
@@ -387,13 +418,15 @@
       ],
       "images": {
         "small": "/drivers/air-conditioner/assets/small.png",
-        "large": "/drivers/air-conditioner/assets/large.png"
+        "large": "/drivers/air-conditioner/assets/large.png",
+        "xlarge": "/drivers/air-conditioner/assets/xlarge.png"
       },
       "id": "air-conditioner"
     },
     {
       "name": {
-        "en": "Boiler / Heat Pump"
+        "en": "Boiler / Heat Pump",
+        "nl": "Cv-ketel / warmtepomp"
       },
       "class": "thermostat",
       "capabilities": [
@@ -412,19 +445,22 @@
             {
               "id": "off",
               "title": {
-                "en": "Off"
+                "en": "Off",
+                "nl": "Uit"
               }
             },
             {
               "id": "heat",
               "title": {
-                "en": "Heat"
+                "en": "Heat",
+                "nl": "Verwarmen"
               }
             },
             {
               "id": "auto",
               "title": {
-                "en": "Auto"
+                "en": "Auto",
+                "nl": "Auto"
               }
             }
           ]
@@ -441,16 +477,20 @@
           "template": "login_credentials",
           "options": {
             "usernameLabel": {
-              "en": "Email"
+              "en": "Email",
+              "nl": "E-mail"
             },
             "usernamePlaceholder": {
-              "en": "your@email.com"
+              "en": "your@email.com",
+              "nl": "jouw@email.nl"
             },
             "passwordLabel": {
-              "en": "Password"
+              "en": "Password",
+              "nl": "Wachtwoord"
             },
             "passwordPlaceholder": {
-              "en": "Your Cozytouch password"
+              "en": "Your Cozytouch password",
+              "nl": "Je Cozytouch-wachtwoord"
             }
           }
         },
@@ -468,13 +508,15 @@
       ],
       "images": {
         "small": "/drivers/boiler/assets/small.png",
-        "large": "/drivers/boiler/assets/large.png"
+        "large": "/drivers/boiler/assets/large.png",
+        "xlarge": "/drivers/boiler/assets/xlarge.png"
       },
       "id": "boiler"
     },
     {
       "name": {
-        "en": "Towel Rack"
+        "en": "Towel Rack",
+        "nl": "Handdoekradiator"
       },
       "class": "radiator",
       "capabilities": [
@@ -487,16 +529,20 @@
           "template": "login_credentials",
           "options": {
             "usernameLabel": {
-              "en": "Email"
+              "en": "Email",
+              "nl": "E-mail"
             },
             "usernamePlaceholder": {
-              "en": "your@email.com"
+              "en": "your@email.com",
+              "nl": "jouw@email.nl"
             },
             "passwordLabel": {
-              "en": "Password"
+              "en": "Password",
+              "nl": "Wachtwoord"
             },
             "passwordPlaceholder": {
-              "en": "Your Cozytouch password"
+              "en": "Your Cozytouch password",
+              "nl": "Je Cozytouch-wachtwoord"
             }
           }
         },
@@ -514,13 +560,15 @@
       ],
       "images": {
         "small": "/drivers/towel-rack/assets/small.png",
-        "large": "/drivers/towel-rack/assets/large.png"
+        "large": "/drivers/towel-rack/assets/large.png",
+        "xlarge": "/drivers/towel-rack/assets/xlarge.png"
       },
       "id": "towel-rack"
     },
     {
       "name": {
-        "en": "Water Heater"
+        "en": "Water Heater",
+        "nl": "Boiler"
       },
       "class": "waterheater",
       "capabilities": [
@@ -555,16 +603,20 @@
           "template": "login_credentials",
           "options": {
             "usernameLabel": {
-              "en": "Email"
+              "en": "Email",
+              "nl": "E-mail"
             },
             "usernamePlaceholder": {
-              "en": "your@email.com"
+              "en": "your@email.com",
+              "nl": "jouw@email.nl"
             },
             "passwordLabel": {
-              "en": "Password"
+              "en": "Password",
+              "nl": "Wachtwoord"
             },
             "passwordPlaceholder": {
-              "en": "Your Cozytouch password"
+              "en": "Your Cozytouch password",
+              "nl": "Je Cozytouch-wachtwoord"
             }
           }
         },
@@ -582,7 +634,8 @@
       ],
       "images": {
         "small": "/drivers/water-heater/assets/small.png",
-        "large": "/drivers/water-heater/assets/large.png"
+        "large": "/drivers/water-heater/assets/large.png",
+        "xlarge": "/drivers/water-heater/assets/xlarge.png"
       },
       "id": "water-heater"
     }
@@ -740,7 +793,7 @@
       "getable": true,
       "setable": false,
       "uiComponent": null,
-      "icon": "/assets/boost.svg"
+      "icon": "/assets/schedule.svg"
     },
     "inlet_temperature": {
       "type": "number",
