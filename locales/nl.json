@@ -6,7 +6,9 @@
     }
   },
   "errors": {
-    "not_connected": "Niet verbonden met Cozytouch. Controleer de inloggegevens in de app-instellingen."
+    "not_connected": "Niet verbonden met Cozytouch. Controleer de inloggegevens in de app-instellingen.",
+    "not_confirmed": "Cozytouch heeft het commando niet bevestigd. Mogelijk is het apparaat offline.",
+    "device_offline": "Cozytouch meldt dat dit apparaat offline is."
   },
   "settings": {
     "credentials": {

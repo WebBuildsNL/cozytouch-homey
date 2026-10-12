@@ -6,7 +6,9 @@
     }
   },
   "errors": {
-    "not_connected": "Not connected to Cozytouch. Check the credentials in the app settings."
+    "not_connected": "Not connected to Cozytouch. Check the credentials in the app settings.",
+    "not_confirmed": "Cozytouch did not confirm the command. The device may be offline.",
+    "device_offline": "Cozytouch reports this device as offline."
   },
   "settings": {
     "credentials": {

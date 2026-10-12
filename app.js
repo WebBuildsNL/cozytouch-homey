@@ -224,6 +224,23 @@ module.exports = class CozytouchApp extends Homey.App {
         }
       }
     }
+
+    await this._refreshAvailability()
+      .catch((err) => this.error('Failed to refresh device availability:', err.message));
+  }
+
+  /**
+   * Emit the cloud's per-device reachability flag from the setup view.
+   * The capabilities endpoint keeps serving the last known values while a
+   * device is offline, so this is the only way to tell stale data apart.
+   */
+  async _refreshAvailability() {
+    const setup = await this._api.getSetup();
+    for (const device of setup.devices) {
+      // An absent flag means unknown, not offline
+      if (typeof device.isAvailable !== 'boolean') continue;
+      this.homey.emit(`cozytouch.deviceAvailability.${device.deviceId}`, device.isAvailable);
+    }
   }
 
   /**

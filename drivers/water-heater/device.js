@@ -8,6 +8,11 @@ const {
   homeyHeatingModeToApiValue,
 } = require('../../lib/cozytouch-capabilities');
 
+// The Cozytouch cloud can keep reporting the old value for a while after a
+// write completed. A confirmed write outranks polled values that still
+// disagree for this long, so a stale poll does not flip it straight back.
+const PENDING_WRITE_GRACE = 2 * 60 * 1000;
+
 const WEEKDAY_TO_SCHEDULE_CAPABILITY = {
   Mon: CapabilityId.SCHEDULE_MON,
   Tue: CapabilityId.SCHEDULE_TUE,
@@ -57,6 +62,8 @@ module.exports = class WaterHeaterDevice extends Homey.Device {
       }
     }
 
+    this._pendingWrites = new Map(); // Homey capability → { value, until }
+
     this._registerCapabilityListeners();
     this._registerPollListener();
 
@@ -71,10 +78,51 @@ module.exports = class WaterHeaterDevice extends Homey.Device {
     return api;
   }
 
+  /**
+   * Write a capability and hold the new value against stale polls.
+   * Throws a user-facing error when the device is offline or Cozytouch does
+   * not confirm the command, so Homey never shows a value that did not land.
+   */
+  async _writeCapability(capability, capabilityId, apiValue, homeyValue) {
+    if (!this.getAvailable()) {
+      throw new Error(this.homey.__('errors.device_offline'));
+    }
+
+    try {
+      await this._getApi().setCapability(this._deviceId, capabilityId, apiValue);
+    } catch (err) {
+      if (err.code !== 'EXECUTION_NOT_CONFIRMED') throw err;
+      this.error(`Write of ${capability} not confirmed:`, err.message);
+      throw new Error(this.homey.__('errors.not_confirmed'), { cause: err });
+    }
+
+    this._pendingWrites.set(capability, { value: homeyValue, until: Date.now() + PENDING_WRITE_GRACE });
+  }
+
+  /**
+   * Whether a polled value should be ignored because a confirmed write of a
+   * different value has not reached the Cozytouch cloud yet.
+   */
+  _isHeldByPendingWrite(capability, polledValue) {
+    const pending = this._pendingWrites.get(capability);
+    if (!pending) return false;
+
+    if (pending.value === polledValue) {
+      this._pendingWrites.delete(capability);
+      return false;
+    }
+    if (Date.now() > pending.until) {
+      this.log(`${capability} still reads ${polledValue} after writing ${pending.value}, accepting the Cozytouch value`);
+      this._pendingWrites.delete(capability);
+      return false;
+    }
+    return true;
+  }
+
   _registerCapabilityListeners() {
     if (this.hasCapability('target_temperature')) {
       this.registerCapabilityListener('target_temperature', async (value) => {
-        await this._getApi().setCapability(this._deviceId, CapabilityId.TARGET_TEMP_231, value);
+        await this._writeCapability('target_temperature', CapabilityId.TARGET_TEMP_231, value, value);
         this.homey.app.pollDevice(this._deviceId);
       });
     }
@@ -86,7 +134,7 @@ module.exports = class WaterHeaterDevice extends Homey.Device {
           throw new Error(`Unsupported heating mode: ${value}`);
         }
         const previous = this.getCapabilityValue('heating_mode');
-        await this._getApi().setCapability(this._deviceId, CapabilityId.HEATING_MODE, apiValue);
+        await this._writeCapability('heating_mode', CapabilityId.HEATING_MODE, apiValue, value);
         if (previous !== null && previous !== value) {
           this._fireChangeTriggers('heating_mode', value, previous);
         }
@@ -97,7 +145,7 @@ module.exports = class WaterHeaterDevice extends Homey.Device {
     if (this.hasCapability('boost_mode')) {
       this.registerCapabilityListener('boost_mode', async (value) => {
         const previous = this.getCapabilityValue('boost_mode');
-        await this._getApi().setCapability(this._deviceId, CapabilityId.BOOST_MODE, value ? 1 : 0);
+        await this._writeCapability('boost_mode', CapabilityId.BOOST_MODE, value ? 1 : 0, value);
         if (previous !== null && previous !== value) {
           this._fireChangeTriggers('boost_mode', value, previous);
         }
@@ -111,6 +159,24 @@ module.exports = class WaterHeaterDevice extends Homey.Device {
       this._updateCapabilities(capabilities);
     };
     this.homey.on(`cozytouch.deviceUpdate.${this._deviceId}`, this._onDeviceUpdate);
+
+    this._onAvailabilityUpdate = (available) => {
+      this._updateAvailability(available);
+    };
+    this.homey.on(`cozytouch.deviceAvailability.${this._deviceId}`, this._onAvailabilityUpdate);
+  }
+
+  _updateAvailability(available) {
+    if (available === this.getAvailable()) return;
+
+    if (available) {
+      this.log('Cozytouch reports the device as reachable again');
+      this.setAvailable().catch((err) => this.error('Failed to set available:', err.message));
+    } else {
+      this.log('Cozytouch reports the device as offline');
+      this.setUnavailable(this.homey.__('errors.device_offline'))
+        .catch((err) => this.error('Failed to set unavailable:', err.message));
+    }
   }
 
   _updateCapabilities(capabilities) {
@@ -126,6 +192,8 @@ module.exports = class WaterHeaterDevice extends Homey.Device {
       if (mapped.capability === 'thermostat_mode') continue;
 
       if (this.hasCapability(mapped.capability)) {
+        if (this._isHeldByPendingWrite(mapped.capability, mapped.value)) continue;
+
         const previous = this.getCapabilityValue(mapped.capability);
         this.setCapabilityValue(mapped.capability, mapped.value).catch((err) => {
           this.error(`Failed to set ${mapped.capability}:`, err.message);
@@ -201,6 +269,9 @@ module.exports = class WaterHeaterDevice extends Homey.Device {
   async onDeleted() {
     if (this._onDeviceUpdate) {
       this.homey.removeListener(`cozytouch.deviceUpdate.${this._deviceId}`, this._onDeviceUpdate);
+    }
+    if (this._onAvailabilityUpdate) {
+      this.homey.removeListener(`cozytouch.deviceAvailability.${this._deviceId}`, this._onAvailabilityUpdate);
     }
   }
 
