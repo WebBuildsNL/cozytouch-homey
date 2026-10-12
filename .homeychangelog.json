@@ -10,5 +10,9 @@
   "1.1.1": {
     "en": "New icons and images, full Dutch translation and a list of supported devices in the app description.",
     "nl": "Nieuwe iconen en afbeeldingen, volledige Nederlandse vertaling en een lijst met ondersteunde apparaten in de appbeschrijving."
+  },
+  "1.1.2": {
+    "en": "Boost mode no longer switches back on and off when Cozytouch has not confirmed a command or the water heater is offline. The water heater now shows as unavailable when Cozytouch reports it offline.",
+    "nl": "Boostmodus springt niet meer aan en uit als Cozytouch een commando niet bevestigt of de boiler offline is. De boiler wordt nu als niet beschikbaar getoond wanneer Cozytouch hem offline meldt."
   }
 }
