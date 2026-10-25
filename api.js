@@ -23,7 +23,7 @@ module.exports = {
     // Build debug info about what we found
     const rawDevices = setup.devices || [];
     const debugDevices = rawDevices.map((dev) => {
-      const modelInfo = getModelInfo(dev.modelId);
+      const modelInfo = getModelInfo(dev.modelId, dev.productId);
       return {
         deviceId: dev.deviceId,
         name: dev.name,

@@ -11,7 +11,7 @@ module.exports = class TowelRackDevice extends Homey.Device {
   async onInit() {
     this._deviceId = this.getStoreValue('deviceId');
     this._modelId = this.getStoreValue('modelId');
-    this._modelInfo = getModelInfo(this._modelId);
+    this._modelInfo = getModelInfo(this._modelId, this.getStoreValue('productId'));
 
     this.log(`Init towel rack device: ${this._modelInfo.name} (model ${this._modelId}, device ${this._deviceId})`);
 

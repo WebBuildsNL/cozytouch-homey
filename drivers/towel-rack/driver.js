@@ -25,6 +25,7 @@ module.exports = class TowelRackDriver extends Homey.Driver {
           store: {
             deviceId,
             modelId: deviceData.modelId,
+            productId: deviceData.productId,
             zoneId: deviceData.zoneId,
             gatewaySerialNumber: deviceData.gatewaySerialNumber,
           },

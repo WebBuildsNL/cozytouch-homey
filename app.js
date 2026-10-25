@@ -159,7 +159,7 @@ module.exports = class CozytouchApp extends Homey.App {
     this._devices.clear();
 
     for (const device of setup.devices) {
-      const modelInfo = getModelInfo(device.modelId);
+      const modelInfo = getModelInfo(device.modelId, device.productId);
 
       if (isUserFacingDevice(modelInfo.type)) {
         this._devices.set(device.deviceId, {
@@ -167,6 +167,8 @@ module.exports = class CozytouchApp extends Homey.App {
           modelInfo,
           capabilities: [],
         });
+      } else {
+        this.log(`Skipping device ${device.deviceId}: model ${device.modelId}, product ${device.productId}, type ${modelInfo.type}`);
       }
     }
 
