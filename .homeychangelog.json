@@ -14,5 +14,9 @@
   "1.1.2": {
     "en": "Boost mode no longer switches back on and off when Cozytouch has not confirmed a command or the water heater is offline. The water heater now shows as unavailable when Cozytouch reports it offline.",
     "nl": "Boostmodus springt niet meer aan en uit als Cozytouch een commando niet bevestigt of de boiler offline is. De boiler wordt nu als niet beschikbaar getoond wanneer Cozytouch hem offline meldt."
+  },
+  "1.1.3": {
+    "en": "Added the Thermor Riva 5 2000W. Towel racks with a model the app does not know yet are now recognised automatically.",
+    "nl": "Thermor Riva 5 2000W toegevoegd. Handdoekradiatoren met een model dat de app nog niet kent, worden nu automatisch herkend."
   }
 }
